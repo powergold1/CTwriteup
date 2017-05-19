@@ -1,0 +1,71 @@
+
+\def\pathToRoot{../}\input{\pathToRoot headers/uebungHeader}
+
+
+\begin{document}
+\title{What is a Category?}
+\author{sarah, leonhard, Andreas Meyer}
+\maketitle
+
+\section {Category}
+
+TODO
+
+\section {Epis and Monis}
+
+TODO
+
+\section {Isomorphisms}
+
+\section {Examples}
+ \begin {itemize}
+  \item TODO Set% {Category of Sets}
+  \item TODO Rel% {Category of Relations}
+  \item TODO Grp% {Category of Groups}
+  \item TODO Vec% {Category of Vectorspaces}
+  \item TODO Pos% {Category of Partial Ordered Sets}
+  \item TODO Discrete, 1, 2% {Discrete Category, Category 1,2}
+ \end {itemize}
+
+\section {Dual categories}
+
+\section {Terminal and Initial Objects}
+\begin {definition}{Initial and terminal Objects}
+  In any category C,
+  \ an object 0 is called initial iff for any object $A \in C$, there is an unique morphism $0 \mapsto A$.
+  \ an object 1 is called terminal iff for any object $A \in C$, there is an unique morphism $A \mapsto 1$. A terminal object in C is initial in $C^{op}$
+
+\end {definition}
+
+\subsection {Proposition:}
+  \\ Initial and terminal objects are unique up to isomorphism.
+
+\subsubsection {Proof:}
+  \\ Assume 0,0' are both inital objects in some category C and show that $f: 0 \mapsto 0', g: 0' \mapsto 0$ form an unique isomorphism $f \circ g$ between 0,0'. One can draw the following diagram:
+  
+\begin{tikzcd}
+      & 0' \arrow{dr}{g} \arrow{rr}{id_{0'}}    &&  0'\\
+      0 \arrow{ur}{f} \arrow{rr}{id_0} && 0 \arrow{ur}{f}
+    \end{tikzcd}
+ 
+
+  Since 0 is initial, we know that f is unique, from the same argument follows uniqueness of $g = f^{-1}$. Therefore $f \circ g$ and $g \circ f$ is unique.    
+    \\ The same holds for terminal objects by duality. $\Box$
+
+    \\    Categories, in which the terminal is identical to the initial object, are called pointed category. Such objects zero objects.
+
+    \subsubsection {Example:}
+    How to show that $\emptyset$ is initial in Set and the one- element set $\{x\}$ terminal?
+
+    \begin {itemize}
+    \item There is only the binary union function from $\emptyset$ to any other set, since there are no arguments in the domain to use.
+    \item Assume some f with
+      \\ $\forall A:$ set with $A \neq \emptyset$, $ f: \A \mapsto \{x\}$
+      f is obviously a constant function, since $\forall y \in A,\ f \ y = x$ holds, and therefore unique.
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
