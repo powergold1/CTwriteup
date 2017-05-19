@@ -15,25 +15,39 @@ TODO
 
 TODO
 
-\section {Isomorphisms}
+\section {Isomorphism}
 
 \section {Examples}
- \begin {itemize}
-  \item TODO Set% {Category of Sets}
-  \item TODO Rel% {Category of Relations}
+\begin {itemize}
+
+ \item The category of sets, denoted as \textbf{Set} is the category whose objects ob(\textbf{Set}) are sets.
+   \\ The arrows in \textbf{Set} are the functions between two $A,B\ \in ob(\textbf{Set}).$
+   \\ The identity- function is defined as $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
+   \\ The composition $\circ$ is the composition of functions and this is associative. Proof:
+   \\ Assume sets A,B,C,D, functions $f:\ A \to B$, $g:\ B \to C$, $h:\ C \to D$ and x $\in$ A.
+   \\ $((h\ \circ \ g)\ \circ\ f)\ x = ((h \ \circ g \ )(f \ x) =h(g(f\  x)) $
+   \\ $(h\ \circ \ (g \ \circ f))\ x = h ((g\ \circ \ f) \ x) = h(g(f \ x))$
+   \\ Thus $(h\ \circ \ g)\ \circ \ f = \ h \ \circ \ (g \ \circ \ f)$ holds. \Box \\
+
+ \item The category of relations, denoted as \textbf{Rel} is the category whose objects are the sets
+   \\The arrows are all binary relations between two $A,B \ \in ob(\textbf{Rel})$
+   \\The identity arrow  is the identity function $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
+   \\ The composition $R \circ S$, $R  \in \textbf{Rel}(A,B), S \in \textbf{Rel}(B,C), A,B,C \in ob(\textbf{Rel})$ is defined as $ (x,y) \in  R \circ S \leftrightarrow \exists  z.(x,z) \in S \land (z,y) \in R$
   \item TODO Grp% {Category of Groups}
   \item TODO Vec% {Category of Vectorspaces}
   \item TODO Pos% {Category of Partial Ordered Sets}
   \item TODO Discrete, 1, 2% {Discrete Category, Category 1,2}
  \end {itemize}
 
-\section {Dual categories}
+ \section {Dual categories}
+
+ $C^{op}$ denotes the dual category for any category C. One obtains $C^{op}$ by reversing the arrows in C. For every sentence $\Sigma$ in the language of category theory, the reversed sentence $\Sigma^*$ exists, therefore any proof for any theorem yields for the dual theorem by the duality principle.  
 
 \section {Terminal and Initial Objects}
 \begin {definition}{Initial and terminal Objects}
   In any category C,
-  \ an object 0 is called initial iff for any object $A \in C$, there is an unique morphism $0 \mapsto A$.
-  \ an object 1 is called terminal iff for any object $A \in C$, there is an unique morphism $A \mapsto 1$. A terminal object in C is initial in $C^{op}$
+  \ an object 0 is called initial iff for any object $A \in C$, there is an unique morphism $0 \to A$.
+  \ an object 1 is called terminal iff for any object $A \in C$, there is an unique morphism $A \to 1$. A terminal object in C is initial in $C^{op}$
 
 \end {definition}
 
@@ -41,7 +55,7 @@ TODO
   \\ Initial and terminal objects are unique up to isomorphism.
 
 \subsubsection {Proof:}
-  \\ Assume 0,0' are both inital objects in some category C and show that $f: 0 \mapsto 0', g: 0' \mapsto 0$ form an unique isomorphism $f \circ g$ between 0,0'. One can draw the following diagram:
+  \\ Assume 0,0' are both inital objects in some category C and show that $f: 0 \to 0', g: 0' \to 0$ form an unique isomorphism $f \circ g$ between 0,0'. One can draw the following diagram:
   
 \begin{tikzcd}
       & 0' \arrow{dr}{g} \arrow{rr}{id_{0'}}    &&  0'\\
@@ -60,7 +74,7 @@ TODO
     \begin {itemize}
     \item There is only the binary union function from $\emptyset$ to any other set, since there are no arguments in the domain to use.
     \item Assume some f with
-      \\ $\forall A:$ set with $A \neq \emptyset$, $ f: \A \mapsto \{x\}$
+      \\ $\forall A:$ set with $A \neq \emptyset$, $ f: \A \to \{x\}$
       f is obviously a constant function, since $\forall y \in A,\ f \ y = x$ holds, and therefore unique.
 
 \end{document}
