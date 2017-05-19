@@ -1,0 +1,1 @@
+in phase1 liegen .tex und .pdf zum writeup. Da ist ein Makefile für geschmeidigeres compilieren, falls das wer benutzen will, kann es sein dass man noch das rubber- package installieren muss. 
