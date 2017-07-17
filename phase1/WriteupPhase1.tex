@@ -1,10 +1,12 @@
 
 \def\pathToRoot{../}\input{\pathToRoot headers/uebungHeader}
 
+\usepackage{charter}
+\fontfamily{bch}\selectfont
 
 \begin{document}
 \title{What is a Category?}
-\author{sarah, leonhard, Andreas Meyer}
+\author{Sarah Mameche, Leonhard Staut, Andreas Meyer}
 \maketitle
 
 \section {Definition of Categories}
@@ -25,17 +27,110 @@
  	\item associativity: $\forall f \in \mathscr{C}(A, B), \; g \in \mathscr{C}(B, C), \; h \in \mathscr{C}(C, D). \; (h \of g) \of f = h \of (g \of f) $.
  \end{itemize}
 \end{definition}
-\section {Epis and Monis}
 
-TODO
+\section {Epics and Monics}
+
+Monomorphisms and epimorphisms are two special kinds of morphisms.
+
+\begin{definition}{Monomorphism}
+  Let $\mathscr{C}$ be a category. A map $X \overset{f}{\to} Y$ is called a monomorphism if for all objects $Z$ and maps
+  $
+  \begin{tikzcd}
+    Z \arrow[r,shift left, "g"] \arrow[r,shift right,swap,"g'"] & X
+  \end{tikzcd}
+  $
+  \[
+    f \circ g = f \circ g' \Rightarrow g = g'
+  \]
+  If $f$ is a monomorphism, we say $f$ is monic.
+\end{definition}
+
+\begin{definition}{Epimorphism}
+  Let $\mathscr{C}$ be a category. A map $X \overset{f}{\to} Y$ is called an epimorphism if for all objects $Z$ and maps
+  $
+  \begin{tikzcd}
+    Y \arrow[r,shift left, "g"] \arrow[r,shift right,swap,"g'"] & Z
+  \end{tikzcd}
+  $
+  \[
+    g' \circ f = g' \circ f \Rightarrow g = g'
+  \]
+  If $f$ is an epimorphism, we say $f$ is epic.
+\end{definition}
+
+%% TODO: We should probably add a reference to the definition of categories, so that we can link it in the text below
+%% TODO: Distribute examples better, in particular we should introduce the dual category earlier, because
+%%       Monics and epics are dual.
+
+In other words, a monomorphism is cancellable on the left, and an epimorphism is cancellable on the right of compositions.
+By the identity laws of categories, for any object $A$ the identity map $1_A$ is always both monic and epic.\\
+In the category \textbf{Set}, monic maps are exactly the injective functions, and epic maps are exactly the surjective functions.
+In ordinary set theory these properties of functions are formulated in terms of elements of a set.
+Epic and monic arrows enable us to talk about these properties without referring to elements at all.
 
 \section {Isomorphisms}
 \begin{definition}{Isomorphism}
-	Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$.
-	\\ A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$.
-	\\ $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
+  Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$.
+  \\ A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$.
+  \\ $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
 \end{definition}
 
+In the category \textbf{Set} isomorphisms are exactly the invertible functions. It can be shown that invertible functions between two sets are
+exactly the bijective functions, i.e. functions that are both injective and surjective.
+Therefore we know already that in the category \textbf{Set} isomorphisms are exactly those maps that are both monic and epic.
+We now show for a general category $\mathscr{C}$ that every isomorphism is monic and epic.
+\begin{proof}
+  Consider the diagram:
+  \[
+    \begin{tikzcd}
+      A \arrow[r,shift left, "y"] \arrow[r,shift right,swap,"x"] &
+      B \arrow[dr, shift left, "1"]  \arrow{r}{m}  &
+      C \arrow{d}{e} \arrow[r,shift left, "i"] \arrow[r,shift right,swap,"j"] & D\\
+      &  & B \arrow[ul, shift left, "1"]&
+    \end{tikzcd}
+  \]
+  $m \from B \to C$ is an isomorphism with inverse $e \from C \to B$.
+  Then:\\
+  \begin{minipage}{.5\linewidth}
+    \vspace{4mm}
+    \centering $m$ is monic:
+    \[
+      \begin{aligned}
+        m \of x &= m \of y\\
+        e \of (m \of x) &= e \of (m \of y)\\
+        (e \of m) \of x &= (e \of m) \of y\\
+        1_B \of x &= 1_B \of y\\
+        x &= y
+      \end{aligned}
+    \]
+  \end{minipage}%
+  \begin{minipage}{.5\linewidth}
+    \vspace{4mm}
+    \centering $m$ is epic:
+    \[
+      \begin{aligned}
+        i \of m &= j \of m \\
+        (i \of m) \of e &= (j \of m) \of e\\
+        i \of (m \of e) &= j \of (m \of e)\\
+        i \of 1_C &= j \of 1_C\\
+        i &= j
+      \end{aligned}
+    \]
+  \end{minipage}%
+\end{proof}
+Note that the converse of the statement holds for the category \textbf{Set}, but not in general.
+If a map is both monic and epic it is not necessarily an isomorphism.
+For a map $f$ to be an isomorphism there needs to exist an inverse map $f^{-1}$.
+However monic and epic maps do not necessarily have inverses.\\
+If a map $f$ is an isomorphism, then it has a unique inverse. Thus we speak of
+\emph{the} inverse of $f$.
+
+\begin{proof}
+  Let $f \from A \to B$ be a map.
+  Assume there exist two inverses $g \from B \to A$: $gf = 1_A$, $fg = 1_B$ and $h \from B \to A$: $hf = 1_A$, $fh = 1_B$.
+  We know from the identity axiom: $1_A \of g = g$ and $h \of 1_B = h$. Therefore we get:
+ \[  1_A \of g = g \textiff (h \of f) \of g = g \textiff h \of (f \of g) = g \textiff h \of 1_B = g \textiff h=g. \]
+\end{proof}
 
 \section {Examples}
 \begin {itemize}
