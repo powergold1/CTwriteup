@@ -28,6 +28,24 @@
  \end{itemize}
 \end{definition}
 
+\section {Diagrams}
+It is often possible and useful to draw diagrams for a category or parts thereof.
+For example consider the following diagram.
+\[
+  \begin{tikzcd}
+    A \arrow{r}{f} \arrow{d}{g} & B \arrow{d}{h} \\
+    C \arrow{r}{i}              & D 
+  \end{tikzcd}
+\]
+This represents the category with the four objects $\{A, B, C, D\}$ and
+the morphisms $\{f, g, h, i, 1_A, 1_B, 1_C, 1_D \}$.
+Since every object is required to have an identity arrow by definition,
+we usually leave them implicit and do not include them in diagrams.\\
+We say a diagram \emph{commutes} if any two paths between two objects
+obtained by composing arrows are the same.
+The example diagram above commutes if $ h \circ f = i \circ g $, meaning there is
+exactly one way to reach $D$ from $A$ in this diagram.
+
 \section {Epics and Monics}
 
 Monomorphisms and epimorphisms are two special kinds of morphisms.
@@ -60,13 +78,17 @@ Monomorphisms and epimorphisms are two special kinds of morphisms.
 
 %% TODO: We should probably add a reference to the definition of categories, so that we can link it in the text below
 %% TODO: Distribute examples better, in particular we should introduce the dual category earlier, because
-%%       Monics and epics are dual.
+%% Monics and epics are dual.
+%% TODO: Possibly add a proof why epic maps in Set are surjective functions
+%% TODO: Possibly add a proof that there are non-surjective epic maps in Ring
 
 In other words, a monomorphism is cancellable on the left, and an epimorphism is cancellable on the right of compositions.
 By the identity laws of categories, for any object $A$ the identity map $1_A$ is always both monic and epic.\\
 In the category \textbf{Set}, monic maps are exactly the injective functions, and epic maps are exactly the surjective functions.
 In ordinary set theory these properties of functions are formulated in terms of elements of a set.
 Epic and monic arrows enable us to talk about these properties without referring to elements at all.
+In the categories \textbf{Grp}, \textbf{Mon}, \textbf{Ring}, and \textbf{Vect}, monic maps are exactly the injective homomorphisms.
+However, in \textbf{Ring} there are maps that are epic, but not surjective.
 
 \section {Isomorphisms}
 \begin{definition}{Isomorphism}
@@ -77,8 +99,11 @@ Epic and monic arrows enable us to talk about these properties without referring
 
 In the category \textbf{Set} isomorphisms are exactly the invertible functions. It can be shown that invertible functions between two sets are
 exactly the bijective functions, i.e. functions that are both injective and surjective.
-Therefore we know already that in the category \textbf{Set} isomorphisms are exactly those maps that are both monic and epic.
-We now show for a general category $\mathscr{C}$ that every isomorphism is monic and epic.
+Therefore, isomorphisms in the category \textbf{Set} are exactly those maps that are both monic and epic.\\
+In the category \textbf{Grp} isomorphisms are exactly the bijective group homomorphisms.
+since those are the group homomorphisms that have an inverse homomorphism.\\
+Similarly, in the category \textbf{Ring} isomorphisms are exactly the bijective ring homomorphisms.\\[1mm]
+We now show for a general category $\mathscr{C}$ that every isomorphism is both monic and epic.
 \begin{proof}
   Consider the diagram:
   \[
@@ -121,13 +146,13 @@ We now show for a general category $\mathscr{C}$ that every isomorphism is monic
 Note that the converse of the statement holds for the category \textbf{Set}, but not in general.
 If a map is both monic and epic it is not necessarily an isomorphism.
 For a map $f$ to be an isomorphism there needs to exist an inverse map $f^{-1}$.
-However monic and epic maps do not necessarily have inverses.\\
-If a map $f$ is an isomorphism, then it has a unique inverse. Thus we speak of
+However monic and epic maps do not necessarily have inverses.\\[1mm]
+If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
 \emph{the} inverse of $f$.
 
 \begin{proof}
   Let $f \from A \to B$ be a map.
-  Assume there exist two inverses $g \from B \to A$: $gf = 1_A$, $fg = 1_B$ and $h \from B \to A$: $hf = 1_A$, $fh = 1_B$.
+  Assume there exist two inverses $g \from B \to A$, such that $gf = 1_A$, $fg = 1_B$ and \mbox{$h \from B \to A$}, such that $hf = 1_A$, $fh = 1_B$.
   We know from the identity axiom: $1_A \of g = g$ and $h \of 1_B = h$. Therefore we get:
  \[  1_A \of g = g \textiff (h \of f) \of g = g \textiff h \of (f \of g) = g \textiff h \of 1_B = g \textiff h=g. \]
 \end{proof}
