@@ -37,14 +37,14 @@ For example consider the following diagram.
     C \arrow{r}{i}              & D 
   \end{tikzcd}
 \]
-This represents the category with the four objects $\{A, B, C, D\}$ and
-the morphisms $\{f, g, h, i, 1_A, 1_B, 1_C, 1_D \}$.
+This represents the category with objects $\{A, B, C, D\}$ and
+morphisms $\{f, g, h, i, 1_A, 1_B, 1_C, 1_D \}$.
 Since every object is required to have an identity arrow by definition,
 we usually leave them implicit and do not include them in diagrams.\\
 We say a diagram \emph{commutes} if any two paths between two objects
 obtained by composing arrows are the same.
 The example diagram above commutes if $ h \circ f = i \circ g $, meaning there is
-exactly one way to reach $D$ from $A$ in this diagram.
+exactly one way to reach $D$ from $A$.
 
 \section {Epics and Monics}
 
@@ -164,7 +164,7 @@ If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
    \\ The arrows in \textbf{Set} are the functions between two $A,B\ \in ob(\textbf{Set}).$
    \\ The identity- function is defined as $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
    \\ The composition $\circ$ is the composition of functions and this is associative. Proof:
-   \\ Assume sets A,B,C,D, functions $f:\ A \to B$, $g:\ B \to C$, $h:\ C \to D$ and x $\in$ A.
+   \\ Assume sets $A, B, C, and D$ and functions $f \from A \to B$, $g \from B \to C$, $h \from C \to D$ and $x \in A$.
    \\ $((h\ \circ \ g)\ \circ\ f)\ x = ((h \ \circ g \ )(f \ x) =h(g(f\  x)) $
    \\ $(h\ \circ \ (g \ \circ f))\ x = h ((g\ \circ \ f) \ x) = h(g(f \ x))$
    \\ Thus $(h\ \circ \ g)\ \circ \ f = \ h \ \circ \ (g \ \circ \ f)$ holds. $\Box$
@@ -181,25 +181,27 @@ If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
   
   \item There is a category \textbf{Grp} whose objects are groups; maps are given by group homomorphisms between two groups $A,B \in ob(\textbf{Grp}).$ 
   
-  \item A single group $(G, \cdot)$ can also be seen as a category $\mathcal{G}$. There is a unique object $G$ which represents the group itself, and arrows in $\mathcal{G}(G, G)$  correspond to group elements. 
-  \\ The identity arrow is the unit element $1$ of the group.
-  \\ Composition operates on two group elements and has to be associative, so it is given by the group action.
-  \\ A group furthermore requires all elements to be invertible, thus we need each arrow $\mathcal{G}(G, G)$ to be an isomorphism.
-  \\ Dropping the last requirement, we get the category of a single monoid.
+  \item A single group $(G, \cdot)$ can also be seen as a category $\mathcal{G}$. There is a unique object $G$ which represents the group itself, and arrows in $\mathcal{G}(G, G)$  correspond to group elements. \\
+    The identity arrow is the unit element $1$ of the group.\\
+    Composition operates on two group elements and has to be associative, so it is given by the group action.\\
+    A group furthermore requires all elements to be invertible, thus we need each arrow $\mathcal{G}(G, G)$ to be an isomorphism.\\
+    Dropping the last requirement, we get the category of a single monoid.
+    %% TODO: explain how this is interesting because objects don't have to be set-like
+
   
- \item Categories need not represent mathematical structures. They can be arbitrarily constructed by giving objects, arrows and arrow composition in a way that satisfies the axioms in the definition. For instance, the category \textbf{1} includes a single object and its identity map, without further specification what the object is. 
- \\ A category without non-trivial arrows is called discrete; removing all arrows except identities makes an arbitrary category discrete.
+  \item Categories need not represent mathematical structures. They can be arbitrarily constructed by giving objects, arrows and arrow composition in a way that satisfies the axioms in the definition. For instance, the category \textbf{1} includes a single object and its identity map, without further specification what the object is. \\
+    A category without non-trivial arrows is called discrete; removing all arrows except identities makes an arbitrary category discrete.
  \end {itemize}
 
  \section {Dual categories}
 
- $C^{op}$ denotes the dual category for any category C. One obtains $C^{op}$ by reversing the arrows in C. For every sentence $\Sigma$ in the language of category theory, the reversed sentence $\Sigma^*$ exists, therefore any proof for any theorem yields for the dual theorem by the duality principle.  
+ $\mathscr{C}^{op}$ denotes the dual category for any category $\mathscr{C}$. One obtains $\mathscr{C}^{op}$ by reversing the arrows in $\mathscr{C}$. For every sentence $\Sigma$ in the language of category theory, the reversed sentence $\Sigma^*$ exists, and any proof for any theorem yields a proof for the dual theorem by the duality principle.
 
 \section {Terminal and Initial Objects}
 \begin {definition}{Initial and terminal Objects}
   In any category C,
-  \ an object 0 is called initial iff for any object $A \in C$, there is an unique morphism $0 \to A$.
-  \ an object 1 is called terminal iff for any object $A \in C$, there is an unique morphism $A \to 1$. A terminal object in C is initial in $C^{op}$.
+  \ an object $0$ is called initial iff for any object $A \in C$, there is a unique morphism $0 \to A$.
+  \ an object $1$ is called terminal iff for any object $A \in C$, there is a unique morphism $A \to 1$. A terminal object in C is initial in $C^{op}$.
 
 \end {definition}
 
@@ -207,7 +209,7 @@ If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
    Initial and terminal objects are unique up to isomorphism.
 
 \subsubsection {Proof:}
-   Assume 0,0' are both inital objects in some category C and show that $f: 0 \to 0', g: 0' \to 0$ form an unique isomorphism $f \circ g$ between 0,0'. One can draw the following diagram:
+   Assume $0, 0'$ are both inital objects in some category C and show that $f: 0 \to 0', g: 0' \to 0$ form a unique isomorphism $f \circ g$ between 0,0'. One can draw the following diagram:
   
 \begin{tikzcd}
       & 0' \arrow{dr}{g} \arrow{rr}{id_{0'}}    &&  0'\\
@@ -215,7 +217,7 @@ If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
     \end{tikzcd}
  
 
-  Since 0 is initial, we know that f is unique, from the same argument follows uniqueness of $g = f^{-1}$. Therefore $f \circ g$ and $g \circ f$ is unique.    
+  Since $0$ is initial, we know that $f$ is unique, from the same argument follows uniqueness of $g = f^{-1}$. Therefore $f \circ g$ and $g \circ f$ is unique.    
     \\ The same holds for terminal objects by duality. $\Box$
 
         Categories in which the terminal is identical to the initial object are called pointed category. Such objects zero objects.
