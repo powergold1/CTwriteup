@@ -28,6 +28,47 @@
  \end{itemize}
 \end{definition}
 
+\section {Examples of Categories}
+\begin {enumerate}
+
+ \item The category of sets, denoted as \textbf{Set}, is the category whose objects $ob$(\textbf{Set}) are sets.
+   \\ The arrows in \textbf{Set} are the functions between two $A,B\ \in ob(\textbf{Set}).$
+   \\ The identity- function is defined as $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
+   \\ The composition $\circ$ is the composition of functions and this is associative. Proof:
+   \\ Assume sets $A, B, C, and D$ and functions $f \from A \to B$, $g \from B \to C$, $h \from C \to D$ and $x \in A$.
+   \\ $((h\ \circ \ g)\ \circ\ f)\ x = ((h \ \circ g \ )(f \ x) =h(g(f\  x)) $
+   \\ $(h\ \circ \ (g \ \circ f))\ x = h ((g\ \circ \ f) \ x) = h(g(f \ x))$
+   \\ Thus $(h\ \circ \ g)\ \circ \ f = \ h \ \circ \ (g \ \circ \ f)$ holds. $\Box$
+ \item The category of relations, denoted as \textbf{Rel}, is the category whose objects are the sets
+   \\The arrows are all binary relations between two $A,B \ \in ob(\textbf{Rel})$
+   \\The identity arrow  is the identity function $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
+   \\ The composition $R \circ S$, $R  \in \textbf{Rel}(A,B), S \in \textbf{Rel}(B,C), A,B,C \in ob(\textbf{Rel})$ is defined as $ (x,y) \in  R \circ S \leftrightarrow \exists  z.(x,z) \in S \land (z,y) \in R$
+   
+  \item Categories similar to \textbf{Set} can be constructed for sets which have some additional structure and structure-preserving mappings between them. For example, there is a category \textbf{Poset} with partially ordered sets as objects. It is defined similarly to \textbf{Set}, with the difference that the functions are monotone. 
+  
+  \item A single poset $(P, \leq)$ also gives rise to a category $\mathscr{P}$ if we take elements of $P$ to be the objects. There is a unique arrow in $\mathscr{P}(A, B)$ iff $A \leq B$. The reflexivity requirement of $\leq$ ensures that identity arrows exist for all objects. Also, the category has composition because the order is transitive.
+  
+  \item \textbf{Vect$_k$} is the category of vector spaces over a field $k$, with linear transformations as arrows.
+  
+  \item There is a category \textbf{Grp} whose objects are groups; maps are given by group homomorphisms between two groups $A,B \in ob(\textbf{Grp}).$
+    Similarly there are categories \textbf{Mon} with monoids as objects and \textbf{Ring} with rings as objects.
+    The maps are given by homomorphisms between monoids and rings respectively.
+  
+  \item
+    The objects in a category don't have to be like sets, and the maps don't have to be like functions.
+    A single group $(G, \cdot)$ can also be seen as a category $\mathcal{G}$. The category has only one object $G$ which represents the group itself,
+    and arrows in $\mathcal{G}(G, G)$  correspond to group elements.
+    The identity arrow is the unit element $1$ of the group.\\
+    Composition of maps in the category $\circ$ corresponds to applying the group action $\cdot$.\\
+    A group requires all elements to have an inverse, thus we need each arrow $\mathcal{G}(G, G)$ to be an isomorphism.\\
+    Dropping the last requirement, the category would represent a single monoid.
+
+  
+  \item Categories need not represent mathematical structures. They can be arbitrarily constructed by giving objects, arrows and arrow composition in a way that satisfies the axioms in the definition. For instance, the category \textbf{1} includes a single object and its identity map, without further specification what the object is. \\
+    A category without non-trivial arrows is called discrete; removing all arrows except identities makes an arbitrary category discrete.
+ \end {enumerate}
+
+
 \section {Diagrams}
 It is often possible and useful to draw diagrams for a category or parts thereof.
 For example consider the following diagram.
@@ -45,6 +86,26 @@ We say a diagram \emph{commutes} if any two paths between two objects
 obtained by composing arrows are the same.
 The example diagram above commutes if $ h \circ f = i \circ g $, meaning there is
 exactly one way to reach $D$ from $A$.
+
+
+\section {Isomorphisms}
+\begin{definition}{Isomorphism}
+  Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$. \\
+  A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$. \\
+  $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
+\end{definition}
+
+In short, a morphism is an isomorphism if it has an inverse. In the category \textbf{Set} for example,
+isomorphisms are exactly the invertible functions.\\
+If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
+\emph{the} inverse of $f$.
+
+\begin{proof}
+  Let $f \from A \to B$ be a map.
+  Assume there exist two inverses $g \from B \to A$, such that $gf = 1_A$, $fg = 1_B$ and \mbox{$h \from B \to A$}, such that $hf = 1_A$, $fh = 1_B$.
+  We know from the identity axiom: $1_A \of g = g$ and $h \of 1_B = h$. Therefore we get:
+ \[  1_A \of g = g \textiff (h \of f) \of g = g \textiff h \of (f \of g) = g \textiff h \of 1_B = g \textiff h=g. \]
+\end{proof}
 
 \section {Epics and Monics}
 
@@ -80,29 +141,54 @@ Monomorphisms and epimorphisms are two special kinds of morphisms.
 %% TODO: Distribute examples better, in particular we should introduce the dual category earlier, because
 %% Monics and epics are dual.
 %% TODO: Possibly add a proof why epic maps in Set are surjective functions
-%% TODO: Possibly add a proof that there are non-surjective epic maps in Ring
 
 In other words, a monomorphism is cancellable on the left, and an epimorphism is cancellable on the right of compositions.
 By the identity laws of categories, for any object $A$ the identity map $1_A$ is always both monic and epic.\\
 In the category \textbf{Set}, monic maps are exactly the injective functions, and epic maps are exactly the surjective functions.
 In ordinary set theory these properties of functions are formulated in terms of elements of a set.
 Epic and monic arrows enable us to talk about these properties without referring to elements at all.
-In the categories \textbf{Grp}, \textbf{Mon}, \textbf{Ring}, and \textbf{Vect}, monic maps are exactly the injective homomorphisms.
-However, in \textbf{Ring} there are maps that are epic, but not surjective.
+In the categories \textbf{Grp}, \textbf{Mon}, \textbf{Ring}, and \textbf{Vect}, monic maps are exactly the injective homomorphisms,
+similarly to the category \textbf{Set}.
+However, we show that there are already maps in \textbf{Mon} that are epic, but not surjective.
+\begin{proof}
+  Consider the two monoids $(\mathbb{N}, +, 0)$ and $(\mathbb{Z}, +, 0)$, i.e. the
+  additive monoids of the natural numbers and the integers respectively.
+  The map $i \from \mathbb{N} \to \mathbb{Z}; \ i(n) = n$ is called inclusion map.
+  Obviously this map is not surjective, because there are no negative integers
+  in the image of $i$. But we show that $i$ is epic.\\
+  Let $(\mathcal{M}, *, e)$ be any other monoid and $f, g \from \mathbb{Z} \to \mathcal{M}$ two
+  monoid homomorphisms.\\
+  We need to show the implication $f \circ i = g \circ i \Rightarrow f = g$, that is,
+  if $f$ and $g$ agree on $\mathbb{N}$, then they agree on the entire domain $\mathbb{Z}$.\\
+  Note that:
+  \begin{align*}
+    f(-n) &= f ((-1) + (-1) + \dots + (-1))\\
+          &= f (-1) * f(-1) * \dots * f(-1)
+  \end{align*}
+  Therefore it suffices to show that $f(-1) = g(-1)$.
+  \begin{align*}
+    f(-1) &= f(-1) * e \\
+          &= f(-1) * g(0) \\
+          &= f(-1) * g(1 - 1) \\
+          &= f(-1) * g(1) * g(-1) \\
+          &\overset{(*)}{=} f(-1) * f(1) * g(-1) \\
+          &= f(-1 + 1) * g(-1) \\
+          &= f(0) * g(-1) \\
+          &= e * g(-1) \\
+          &= g(-1) \\ 
+  \end{align*}
+  In $(*)$ we use our assumption that $f=g$ if restricted to $\mathbb{N}$.\\
+  Therefore $i$ is an epic map, even though it is not surjective.
+\end{proof}
 
-\section {Isomorphisms}
-\begin{definition}{Isomorphism}
-  Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$.
-  \\ A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$.
-  \\ $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
-\end{definition}
-
-In the category \textbf{Set} isomorphisms are exactly the invertible functions. It can be shown that invertible functions between two sets are
+Now we study how monomorphisms and epimorphisms are related to isomorphisms.
+Recall that in the category \textbf{Set} isomorphisms are exactly the invertible functions.
+It can be shown that invertible functions between two sets are
 exactly the bijective functions, i.e. functions that are both injective and surjective.
 Therefore, isomorphisms in the category \textbf{Set} are exactly those maps that are both monic and epic.\\
 In the category \textbf{Grp} isomorphisms are exactly the bijective group homomorphisms.
 since those are the group homomorphisms that have an inverse homomorphism.\\
-Similarly, in the category \textbf{Ring} isomorphisms are exactly the bijective ring homomorphisms.\\[1mm]
+Similarly, in the category \textbf{Ring} isomorphisms are exactly the bijective ring homomorphisms.\\
 We now show for a general category $\mathscr{C}$ that every isomorphism is both monic and epic.
 \begin{proof}
   Consider the diagram:
@@ -147,51 +233,7 @@ Note that the converse of the statement holds for the category \textbf{Set}, but
 If a map is both monic and epic it is not necessarily an isomorphism.
 For a map $f$ to be an isomorphism there needs to exist an inverse map $f^{-1}$.
 However monic and epic maps do not necessarily have inverses.\\[1mm]
-If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
-\emph{the} inverse of $f$.
 
-\begin{proof}
-  Let $f \from A \to B$ be a map.
-  Assume there exist two inverses $g \from B \to A$, such that $gf = 1_A$, $fg = 1_B$ and \mbox{$h \from B \to A$}, such that $hf = 1_A$, $fh = 1_B$.
-  We know from the identity axiom: $1_A \of g = g$ and $h \of 1_B = h$. Therefore we get:
- \[  1_A \of g = g \textiff (h \of f) \of g = g \textiff h \of (f \of g) = g \textiff h \of 1_B = g \textiff h=g. \]
-\end{proof}
-
-\section {Examples}
-\begin {itemize}
-
- \item The category of sets, denoted as \textbf{Set}, is the category whose objects $ob$(\textbf{Set}) are sets.
-   \\ The arrows in \textbf{Set} are the functions between two $A,B\ \in ob(\textbf{Set}).$
-   \\ The identity- function is defined as $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
-   \\ The composition $\circ$ is the composition of functions and this is associative. Proof:
-   \\ Assume sets $A, B, C, and D$ and functions $f \from A \to B$, $g \from B \to C$, $h \from C \to D$ and $x \in A$.
-   \\ $((h\ \circ \ g)\ \circ\ f)\ x = ((h \ \circ g \ )(f \ x) =h(g(f\  x)) $
-   \\ $(h\ \circ \ (g \ \circ f))\ x = h ((g\ \circ \ f) \ x) = h(g(f \ x))$
-   \\ Thus $(h\ \circ \ g)\ \circ \ f = \ h \ \circ \ (g \ \circ \ f)$ holds. $\Box$
- \item The category of relations, denoted as \textbf{Rel}, is the category whose objects are the sets
-   \\The arrows are all binary relations between two $A,B \ \in ob(\textbf{Rel})$
-   \\The identity arrow  is the identity function $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
-   \\ The composition $R \circ S$, $R  \in \textbf{Rel}(A,B), S \in \textbf{Rel}(B,C), A,B,C \in ob(\textbf{Rel})$ is defined as $ (x,y) \in  R \circ S \leftrightarrow \exists  z.(x,z) \in S \land (z,y) \in R$
-   
-  \item Categories similar to \textbf{Set} can be constructed for sets which have some additional structure and structure-preserving mappings between them. For example, there is a category \textbf{Poset} with partially ordered sets as objects. It is defined similarly to \textbf{Set}, with the difference that the functions are monotone. 
-  
-  \item A single poset $(P, \leq)$ also gives rise to a category $\mathscr{P}$ if we take elements of $P$ to be the objects. There is a unique arrow in $\mathscr{P}(A, B)$ iff $A \leq B$. The reflexivity requirement of $\leq$ ensures that identity arrows exist for all objects. Also, the category has composition because the order is transitive.
-  
-  \item \textbf{Vect$_k$} is the category of vector spaces over a field $k$, with linear transformations as arrows.
-  
-  \item There is a category \textbf{Grp} whose objects are groups; maps are given by group homomorphisms between two groups $A,B \in ob(\textbf{Grp}).$ 
-  
-  \item A single group $(G, \cdot)$ can also be seen as a category $\mathcal{G}$. There is a unique object $G$ which represents the group itself, and arrows in $\mathcal{G}(G, G)$  correspond to group elements. \\
-    The identity arrow is the unit element $1$ of the group.\\
-    Composition operates on two group elements and has to be associative, so it is given by the group action.\\
-    A group furthermore requires all elements to be invertible, thus we need each arrow $\mathcal{G}(G, G)$ to be an isomorphism.\\
-    Dropping the last requirement, we get the category of a single monoid.
-    %% TODO: explain how this is interesting because objects don't have to be set-like
-
-  
-  \item Categories need not represent mathematical structures. They can be arbitrarily constructed by giving objects, arrows and arrow composition in a way that satisfies the axioms in the definition. For instance, the category \textbf{1} includes a single object and its identity map, without further specification what the object is. \\
-    A category without non-trivial arrows is called discrete; removing all arrows except identities makes an arbitrary category discrete.
- \end {itemize}
 
  \section {Dual categories}
 
