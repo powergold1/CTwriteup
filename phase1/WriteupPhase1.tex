@@ -191,7 +191,7 @@ since those are the group homomorphisms that have an inverse homomorphism.\\
 Similarly, in the category \textbf{Ring} isomorphisms are exactly the bijective ring homomorphisms.\\
 We now show for a general category $\mathscr{C}$ that every isomorphism is both monic and epic.
 \begin{proof}
-  Consider the diagram:
+  Consider the commuting diagram:
   \[
     \begin{tikzcd}
       A \arrow[r,shift left, "y"] \arrow[r,shift right,swap,"x"] &
@@ -235,44 +235,78 @@ For a map $f$ to be an isomorphism there needs to exist an inverse map $f^{-1}$.
 However monic and epic maps do not necessarily have inverses.\\[1mm]
 
 
- \section {Dual categories}
+\section {Dual categories}
 
- $\mathscr{C}^{op}$ denotes the dual category for any category $\mathscr{C}$. One obtains $\mathscr{C}^{op}$ by reversing the arrows in $\mathscr{C}$. For every sentence $\Sigma$ in the language of category theory, the reversed sentence $\Sigma^*$ exists, and any proof for any theorem yields a proof for the dual theorem by the duality principle.
+$\mathscr{C}^{op}$ denotes the dual category for any category $\mathscr{C}$.
+$\mathscr{C}^{op}$ is obtained by reversing the arrows in $\mathscr{C}$.
+For every sentence $\Sigma$ in the language of category theory,
+the reversed sentence $\Sigma^*$ exists,
+and any proof for any theorem yields a proof for the dual theorem by the duality principle.\\
+Dual categories are especially useful for structures that are inherently dual.
+As an example, epic and monic maps are dual to each other, that is any monic map in $\mathscr{C}$
+is an epic map in $\mathscr{C}^{op}$ and vice versa.
+The following theorem is an example where duality can be used.
+We first show that the composition of two monic maps is monic.
+\begin{proof}
+  Consider the commuting diagram:
+  \[
+    \begin{tikzcd}
+      A \arrow[dr, swap, "h"] \arrow{r}{g} & B \arrow{d}{f} \\
+      & C
+    \end{tikzcd}
+  \]
+  We assume $f$ and $g$ to be monic and show that $h = f \circ g $ is monic.
+  Let $X$ be any object and $x, x' \from X \to A$ two maps in the category.
+  \begin{align*}
+    h \circ x &= h \circ x' \\
+    (f \circ g) \circ x &= (f \circ g) \circ x' \\
+    f \circ (g \circ x) &= f \circ (g \circ x') \\
+    g \circ x &= g \circ x' \\
+    x &= x' \\
+  \end{align*}
+  Therefore $h$ is monic.
+\end{proof}
+The dual of the statement above states that the composition of epic maps is also epic.
+We get this fact immediately using the duality principle, since epic maps in $\mathscr{C}$
+are monic maps in $\mathscr{C}^{op}$ whose composition is monic in $\mathscr{C}^{op}$ and
+therefore epic in $\mathscr{C}$.
 
 \section {Terminal and Initial Objects}
 \begin {definition}{Initial and terminal Objects}
-  In any category C,
-  \ an object $0$ is called initial iff for any object $A \in C$, there is a unique morphism $0 \to A$.
-  \ an object $1$ is called terminal iff for any object $A \in C$, there is a unique morphism $A \to 1$. A terminal object in C is initial in $C^{op}$.
-
+  In any category C, \ an object $0$ is called initial
+  iff for any object $A \in C$, there is a unique morphism $0 \to A$. \ an object $1$
+  is called terminal iff for any object $A \in C$,
+  there is a unique morphism $A \to 1$. A terminal object in C is initial in $C^{op}$.
 \end {definition}
 
 \subsection {Proposition:}
-   Initial and terminal objects are unique up to isomorphism.
+Initial and terminal objects are unique up to isomorphism.
 
 \subsubsection {Proof:}
-   Assume $0, 0'$ are both inital objects in some category C and show that $f: 0 \to 0', g: 0' \to 0$ form a unique isomorphism $f \circ g$ between 0,0'. One can draw the following diagram:
-  
+Assume $0, 0'$ are both inital objects in some category C and show that
+$f \from 0 \to 0', g \from 0' \to 0$ form a unique isomorphism
+$f \circ g$ between 0,0'. One can draw the following diagram:
+
 \begin{tikzcd}
-      & 0' \arrow{dr}{g} \arrow{rr}{id_{0'}}    &&  0'\\
-      0 \arrow{ur}{f} \arrow{rr}{id_0} && 0 \arrow{ur}{f}
-    \end{tikzcd}
- 
+  & 0' \arrow{dr}{g} \arrow{rr}{id_{0'}}    &&  0'\\
+  0 \arrow{ur}{f} \arrow{rr}{id_0} && 0 \arrow{ur}{f}
+\end{tikzcd}
 
-  Since $0$ is initial, we know that $f$ is unique, from the same argument follows uniqueness of $g = f^{-1}$. Therefore $f \circ g$ and $g \circ f$ is unique.    
-    \\ The same holds for terminal objects by duality. $\Box$
 
-        Categories in which the terminal is identical to the initial object are called pointed category. Such objects zero objects.
+Since $0$ is initial, we know that $f$ is unique, from the same argument follows uniqueness of $g = f^{-1}$. Therefore $f \circ g$ and $g \circ f$ is unique.    
+\\ The same holds for terminal objects by duality. $\Box$
 
-    \subsubsection {Example:}
-    How to show that $\emptyset$ is initial in Set and the one- element set $\{x\}$ terminal?
+Categories in which the terminal is identical to the initial object are called pointed category. Such objects zero objects.
 
-    \begin {itemize}
-    \item There is only the binary union function from $\emptyset$ to any other set, since there are no arguments in the domain to use.
-    \item Assume some f with
-      \\ $\forall A:$ set with $A \neq \emptyset$, $ f: A \to \{x\}$
-      f is obviously a constant function, since $\forall y \in A,\ f \ y = x$ holds, and therefore unique.
-		\end{itemize}
+\subsubsection {Example:}
+How to show that $\emptyset$ is initial in Set and the one- element set $\{x\}$ terminal?
+
+\begin {itemize}
+\item There is only the binary union function from $\emptyset$ to any other set, since there are no arguments in the domain to use.
+\item Assume some f with
+  \\ $\forall A:$ set with $A \neq \emptyset$, $ f: A \to \{x\}$
+  f is obviously a constant function, since $\forall y \in A,\ f \ y = x$ holds, and therefore unique.
+\end{itemize}
 \end{document}
 
 %%% Local Variables:
