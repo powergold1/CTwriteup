@@ -137,9 +137,7 @@ Monomorphisms and epimorphisms are two special kinds of morphisms.
   If $f$ is an epimorphism, we say $f$ is epic.
 \end{definition}
 
-%% TODO: We should probably add a reference to the definition of categories, so that we can link it in the text below
-%% TODO: Distribute examples better, in particular we should introduce the dual category earlier, because
-%% Monics and epics are dual.
+%% TODO: We should possibly add a reference to the definition of categories, so that we can link it in the text below
 %% TODO: Possibly add a proof why epic maps in Set are surjective functions
 
 In other words, a monomorphism is cancellable on the left, and an epimorphism is cancellable on the right of compositions.
@@ -148,7 +146,7 @@ In the category \textbf{Set}, monic maps are exactly the injective functions, an
 In ordinary set theory these properties of functions are formulated in terms of elements of a set.
 Epic and monic arrows enable us to talk about these properties without referring to elements at all.
 In the categories \textbf{Grp}, \textbf{Mon}, \textbf{Ring}, and \textbf{Vect}, monic maps are exactly the injective homomorphisms,
-similarly to the category \textbf{Set}.
+similar to the category \textbf{Set}.
 However, we show that there are already maps in \textbf{Mon} that are epic, but not surjective.
 \begin{proof}
   Consider the two monoids $(\mathbb{N}, +, 0)$ and $(\mathbb{Z}, +, 0)$, i.e. the
@@ -232,8 +230,7 @@ We now show for a general category $\mathscr{C}$ that every isomorphism is both 
 Note that the converse of the statement holds for the category \textbf{Set}, but not in general.
 If a map is both monic and epic it is not necessarily an isomorphism.
 For a map $f$ to be an isomorphism there needs to exist an inverse map $f^{-1}$.
-However monic and epic maps do not necessarily have inverses.\\[1mm]
-
+However monic and epic maps do not necessarily have an inverse.\\
 
 \section {Dual categories}
 
@@ -285,27 +282,29 @@ Initial and terminal objects are unique up to isomorphism.
 \subsubsection {Proof:}
 Assume $0, 0'$ are both inital objects in some category C and show that
 $f \from 0 \to 0', g \from 0' \to 0$ form a unique isomorphism
-$f \circ g$ between 0,0'. One can draw the following diagram:
+$f \circ g$ between 0,0'. Consider the following diagram:
 
+\[
 \begin{tikzcd}
   & 0' \arrow{dr}{g} \arrow{rr}{id_{0'}}    &&  0'\\
   0 \arrow{ur}{f} \arrow{rr}{id_0} && 0 \arrow{ur}{f}
 \end{tikzcd}
+\]
 
+Since $0$ is initial, we know that $f$ is unique, from the same argument follows uniqueness of $g = f^{-1}$.
+Therefore $f \circ g$ and $g \circ f$ is unique.\\
+The same holds for terminal objects by duality. $\Box$
 
-Since $0$ is initial, we know that $f$ is unique, from the same argument follows uniqueness of $g = f^{-1}$. Therefore $f \circ g$ and $g \circ f$ is unique.    
-\\ The same holds for terminal objects by duality. $\Box$
-
-Categories in which the terminal is identical to the initial object are called pointed category. Such objects zero objects.
+Categories in which the terminal is identical to the initial object are called pointed category.
+Such objects are called zero objects.
 
 \subsubsection {Example:}
 How to show that $\emptyset$ is initial in Set and the one- element set $\{x\}$ terminal?
 
 \begin {itemize}
-\item There is only the binary union function from $\emptyset$ to any other set, since there are no arguments in the domain to use.
-\item Assume some f with
-  \\ $\forall A:$ set with $A \neq \emptyset$, $ f: A \to \{x\}$
-  f is obviously a constant function, since $\forall y \in A,\ f \ y = x$ holds, and therefore unique.
+\item There is only the empty function from $\emptyset$ to any other set, since there are no arguments in the domain.
+\item For all sets $A$ there is only one possible function $f \from A \to \{x\}$, since all elements of $A$ can only be mapped
+  to $x$, that is $\forall y \in A,\ f \ y = x$.
 \end{itemize}
 \end{document}
 
