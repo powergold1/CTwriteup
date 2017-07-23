@@ -28,6 +28,47 @@
  \end{itemize}
 \end{definition}
 
+
+\section {Diagrams}
+It is often possible and useful to draw diagrams for a category or parts thereof.
+For example consider the following diagram.
+\[
+  \begin{tikzcd}
+    A \arrow{r}{f} \arrow{d}{g} & B \arrow{d}{h} \\
+    C \arrow{r}{i}              & D 
+  \end{tikzcd}
+\]
+This represents a category with objects $\{A, B, C, D\}$ and
+morphisms $\{f, g, h, i, 1_A, 1_B, 1_C, 1_D \}$.
+Since every object is required to have an identity arrow by definition,
+we usually leave them implicit and do not include them in diagrams.\\
+We say a diagram \emph{commutes} if any two paths between two objects
+obtained by composing arrows are the same.
+The example diagram above commutes if $ h \circ f = i \circ g $, meaning there is
+exactly one way to reach $D$ from $A$.
+
+
+\section {Isomorphisms}
+\begin{definition}{Isomorphism}
+  Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$. \\
+  A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$. \\
+  $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
+\end{definition}
+
+In short, a morphism is an isomorphism if it has an inverse.
+In the category \textbf{Set} for example,
+isomorphisms are exactly the invertible functions.\\
+If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
+\emph{the} inverse of $f$.
+
+\begin{proof}
+  Let $f \from A \to B$ be a map.
+  Assume there exist two inverses $g \from B \to A$, such that $gf = 1_A$, $fg = 1_B$ and \mbox{$h \from B \to A$}, such that $hf = 1_A$, $fh = 1_B$.
+  We know from the identity axiom: $1_A \of g = g$ and $h \of 1_B = h$. Therefore we get:
+ \[  1_A \of g = g \textiff (h \of f) \of g = g \textiff h \of (f \of g) = g \textiff h \of 1_B = g \textiff h=g. \]
+\end{proof}
+
+
 \section {Examples of Categories}
 \begin {enumerate}
 
@@ -68,45 +109,6 @@
     A category without non-trivial arrows is called discrete; removing all arrows except identities makes an arbitrary category discrete.
  \end {enumerate}
 
-
-\section {Diagrams}
-It is often possible and useful to draw diagrams for a category or parts thereof.
-For example consider the following diagram.
-\[
-  \begin{tikzcd}
-    A \arrow{r}{f} \arrow{d}{g} & B \arrow{d}{h} \\
-    C \arrow{r}{i}              & D 
-  \end{tikzcd}
-\]
-This represents a category with objects $\{A, B, C, D\}$ and
-morphisms $\{f, g, h, i, 1_A, 1_B, 1_C, 1_D \}$.
-Since every object is required to have an identity arrow by definition,
-we usually leave them implicit and do not include them in diagrams.\\
-We say a diagram \emph{commutes} if any two paths between two objects
-obtained by composing arrows are the same.
-The example diagram above commutes if $ h \circ f = i \circ g $, meaning there is
-exactly one way to reach $D$ from $A$.
-
-
-\section {Isomorphisms}
-\begin{definition}{Isomorphism}
-  Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$. \\
-  A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$. \\
-  $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
-\end{definition}
-
-In short, a morphism is an isomorphism if it has an inverse.
-In the category \textbf{Set} for example,
-isomorphisms are exactly the invertible functions.\\
-If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
-\emph{the} inverse of $f$.
-
-\begin{proof}
-  Let $f \from A \to B$ be a map.
-  Assume there exist two inverses $g \from B \to A$, such that $gf = 1_A$, $fg = 1_B$ and \mbox{$h \from B \to A$}, such that $hf = 1_A$, $fh = 1_B$.
-  We know from the identity axiom: $1_A \of g = g$ and $h \of 1_B = h$. Therefore we get:
- \[  1_A \of g = g \textiff (h \of f) \of g = g \textiff h \of (f \of g) = g \textiff h \of 1_B = g \textiff h=g. \]
-\end{proof}
 
 \section {Epics and Monics}
 
