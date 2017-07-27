@@ -1,10 +1,12 @@
 
 \def\pathToRoot{../}\input{\pathToRoot headers/uebungHeader}
 
+\usepackage{charter}
+\fontfamily{bch}\selectfont
 
 \begin{document}
 \title{What is a Category?}
-\author{sarah, leonhard, Andreas Meyer}
+\author{Sarah Mameche, Leonhard Staut, Andreas Meyer}
 \maketitle
 
 \section {Definition of Categories}
@@ -25,26 +27,56 @@
  	\item associativity: $\forall f \in \mathscr{C}(A, B), \; g \in \mathscr{C}(B, C), \; h \in \mathscr{C}(C, D). \; (h \of g) \of f = h \of (g \of f) $.
  \end{itemize}
 \end{definition}
-\section {Epis and Monis}
 
-TODO
+
+\section {Diagrams}
+It is often possible and useful to draw diagrams for a category or parts thereof.
+For example consider the following diagram.
+\[
+  \begin{tikzcd}
+    A \arrow{r}{f} \arrow{d}{g} & B \arrow{d}{h} \\
+    C \arrow{r}{i}              & D 
+  \end{tikzcd}
+\]
+This represents a category with objects $\{A, B, C, D\}$ and
+morphisms $\{f, g, h, i, 1_A, 1_B, 1_C, 1_D \}$.
+Since every object is required to have an identity arrow by definition,
+we usually leave them implicit and do not include them in diagrams.\\
+We say a diagram \emph{commutes} if any two paths between two objects
+obtained by composing arrows are the same.
+The example diagram above commutes if $ h \circ f = i \circ g $, meaning there is
+exactly one way to reach $D$ from $A$.
+
 
 \section {Isomorphisms}
 \begin{definition}{Isomorphism}
-	Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$.
-	\\ A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$.
-	\\ $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
+  Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$. \\
+  A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$. \\
+  $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
 \end{definition}
 
+In short, a morphism is an isomorphism if it has an inverse.
+In the category \textbf{Set} for example,
+isomorphisms are exactly the invertible functions.\\
+If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
+\emph{the} inverse of $f$.
 
-\section {Examples}
-\begin {itemize}
+\begin{proof}
+  Let $f \from A \to B$ be a map.
+  Assume there exist two inverses $g \from B \to A$, such that $gf = 1_A$, $fg = 1_B$ and \mbox{$h \from B \to A$}, such that $hf = 1_A$, $fh = 1_B$.
+  We know from the identity axiom: $1_A \of g = g$ and $h \of 1_B = h$. Therefore we get:
+ \[  1_A \of g = g \textiff (h \of f) \of g = g \textiff h \of (f \of g) = g \textiff h \of 1_B = g \textiff h=g. \]
+\end{proof}
+
+
+\section {Examples of Categories}
+\begin {enumerate}
 
  \item The category of sets, denoted as \textbf{Set}, is the category whose objects $ob$(\textbf{Set}) are sets.
    \\ The arrows in \textbf{Set} are the functions between two $A,B\ \in ob(\textbf{Set}).$
    \\ The identity- function is defined as $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
    \\ The composition $\circ$ is the composition of functions and this is associative. Proof:
-   \\ Assume sets A,B,C,D, functions $f:\ A \to B$, $g:\ B \to C$, $h:\ C \to D$ and x $\in$ A.
+   \\ Assume sets $A, B, C, and D$ and functions $f \from A \to B$, $g \from B \to C$, $h \from C \to D$ and $x \in A$.
    \\ $((h\ \circ \ g)\ \circ\ f)\ x = ((h \ \circ g \ )(f \ x) =h(g(f\  x)) $
    \\ $(h\ \circ \ (g \ \circ f))\ x = h ((g\ \circ \ f) \ x) = h(g(f \ x))$
    \\ Thus $(h\ \circ \ g)\ \circ \ f = \ h \ \circ \ (g \ \circ \ f)$ holds. $\Box$
@@ -59,56 +91,341 @@ TODO
   
   \item \textbf{Vect$_k$} is the category of vector spaces over a field $k$, with linear transformations as arrows.
   
-  \item There is a category \textbf{Grp} whose objects are groups; maps are given by group homomorphisms between two groups $A,B \in ob(\textbf{Grp}).$ 
+  \item There is a category \textbf{Grp} whose objects are groups; maps are given by group homomorphisms between two groups $A,B \in ob(\textbf{Grp}).$
+    Similarly there are categories \textbf{Mon} with monoids as objects and \textbf{Ring} with rings as objects.
+    The maps are given by homomorphisms between monoids and rings respectively.
   
-  \item A single group $(G, \cdot)$ can also be seen as a category $\mathcal{G}$. There is a unique object $G$ which represents the group itself, and arrows in $\mathcal{G}(G, G)$  correspond to group elements. 
-  \\ The identity arrow is the unit element $1$ of the group.
-  \\ Composition operates on two group elements and has to be associative, so it is given by the group action.
-  \\ A group furthermore requires all elements to be invertible, thus we need each arrow $\mathcal{G}(G, G)$ to be an isomorphism.
-  \\ Dropping the last requirement, we get the category of a single monoid.
+  \item
+    The objects in a category do not have to be like sets, and the maps do not have to be like functions.
+    A single group $(G, \cdot)$ can also be seen as a category $\mathcal{G}$. The category has only one object $G$ which represents the group itself,
+    and arrows in $\mathcal{G}(G, G)$  correspond to group elements.
+    The identity arrow is the unit element $1$ of the group.\\
+    Composition of maps in the category $\circ$ corresponds to applying the group action $\cdot$.\\
+    A group requires all elements to have an inverse, thus we need each arrow $\mathcal{G}(G, G)$ to be an isomorphism.\\
+    Dropping the last requirement, the category would represent a single monoid.
+
   
- \item Categories need not represent mathematical structures. They can be arbitrarily constructed by giving objects, arrows and arrow composition in a way that satisfies the axioms in the definition. For instance, the category \textbf{1} includes a single object and its identity map, without further specification what the object is. 
- \\ A category without non-trivial arrows is called discrete; removing all arrows except identities makes an arbitrary category discrete.
- \end {itemize}
+  \item Categories need not represent mathematical structures. They can be arbitrarily constructed by giving objects, arrows and arrow composition in a way that satisfies the axioms in the definition. For instance, the category \textbf{1} includes a single object and its identity map, without further specification what the object is. \\
+    A category without non-trivial arrows is called discrete; removing all arrows except identities makes an arbitrary category discrete.
+ \end {enumerate}
 
- \section {Dual categories}
 
- $C^{op}$ denotes the dual category for any category C. One obtains $C^{op}$ by reversing the arrows in C. For every sentence $\Sigma$ in the language of category theory, the reversed sentence $\Sigma^*$ exists, therefore any proof for any theorem yields for the dual theorem by the duality principle.  
+\section {Epics and Monics}
+
+Monomorphisms and epimorphisms are two special kinds of morphisms.
+
+\begin{definition}{Monomorphism}
+  Let $\mathscr{C}$ be a category. A map $X \overset{f}{\to} Y$ is called a monomorphism if for all objects $Z$ and maps
+  $
+  \begin{tikzcd}
+    Z \arrow[r,shift left, "g"] \arrow[r,shift right,swap,"g'"] & X
+  \end{tikzcd}
+  $
+  \[
+    f \circ g = f \circ g' \Rightarrow g = g'
+  \]
+  If $f$ is a monomorphism, we say $f$ is monic.
+\end{definition}
+
+\begin{definition}{Epimorphism}
+  Let $\mathscr{C}$ be a category. A map $X \overset{f}{\to} Y$ is called an epimorphism if for all objects $Z$ and maps
+  $
+  \begin{tikzcd}
+    Y \arrow[r,shift left, "g"] \arrow[r,shift right,swap,"g'"] & Z
+  \end{tikzcd}
+  $
+  \[
+    g' \circ f = g' \circ f \Rightarrow g = g'
+  \]
+  If $f$ is an epimorphism, we say $f$ is epic.
+\end{definition}
+
+%% TODO: We could add a reference to the definition of categories, so that we can link it in the text below
+
+In other words, a monomorphism is cancellable on the left, and an epimorphism is cancellable on the right of compositions.
+By the identity laws of categories, for any object $A$ the identity map $1_A$ is always both monic and epic.\\
+In the category \textbf{Set}, monic maps are exactly the injective functions, and epic maps are exactly the surjective functions.
+\begin{proof}
+  First we show $f$ monic $\Leftrightarrow$ $f$ injective.
+  \begin{itemize}
+  \item $"\Rightarrow"$: Let $f \from A \to B$ be monic, $a, a' \in A$ with $a \neq a'$, $g, g' \from {x} \to A$ with $g(x) = a, g'(x) = a'$.
+    We show $a \neq a' \Rightarrow f(a) \neq f(a')$.
+    We have $g \neq g'$.
+    Since $f$ is monic we get $f \circ g \neq f \circ g'$.\\
+    We have: $f(a) = f(g(x)) \neq f(g'(x)) = f(a')$. Therefore $f$ is injective.
+  \item $"\Leftarrow"$: Let $f \from A \to B$ be injective, $g, g' \from X \to A$ with $g \neq g'$.
+    We show $f \circ g \neq f \circ g'$.
+    There exists an $x \in X$ with $g(x) \neq g'(x)$.\\
+    We have: $f(g(x)) \neq f(g'(x))$ since $f$ is injective.
+    Therefore $f$ is monic.
+  \end{itemize}
+  Secondly we show $f$ epic $\Leftrightarrow$ $f$ surjective.
+  \begin{itemize}
+  \item $"\Rightarrow"$: Let $f \from A \to B$ be epic, and $X$ a two element set, e.g. $\{ \texttt{true}, \texttt{false}\}$.
+    Let $g \from B \to X$ be the characteristic function of \texttt{Im}$(f)$ which is defined by
+    $\forall b \in B. \ g(y) = \texttt{true}
+    \Leftrightarrow y \in \texttt{Im}(f)$.
+    And let $g' \from B \to X$ be the constant \texttt{true}-function.
+    $\forall b \in B. \ g'(y) = \texttt{true}$.
+    Note that $g = g'$ exactly if $f$ is surjective.\\
+    We have: $g \of f = g' \of f \xRightarrow{f \ epic} g = g'$.
+    Therefore $f$ is surjective.
+  \item $"\Leftarrow"$: Let $f \from A \to B$ be surjective, and $g, g' \from B \to X$ with $g \neq g'$.
+    There exists a $b \in B$ with $g(x) \neq g'(x)$.
+    Since $f$ is surjective, there is an $a \in A$ with $f(a) = x$.\\
+    We have: $g(f(a) \neq g'(f(a)) \Rightarrow g \circ f \neq g' \circ f$.
+    Therefore $f$ is epic.
+  \end{itemize}
+\end{proof}
+In ordinary set theory these properties of functions (injectivity, surjectivity) are formulated in terms of elements of a set.
+Epic and monic maps enable us to abstract from that and
+talk about these properties without referring to sets or their elements at all.
+We can then use this abstract concept of monic and epic arrows to find these structures
+in different categories.
+In the categories \textbf{Mon}, \textbf{Grp}, \textbf{Ring}, and \textbf{Vect}
+monic maps are exactly the injective homomorphisms,
+similar to the category \textbf{Set}.
+However, we show that there are already maps in \textbf{Mon} that are epic, but not surjective.
+\begin{proof}
+  Consider the two monoids $(\mathbb{N}, +, 0)$ and $(\mathbb{Z}, +, 0)$, i.e. the
+  additive monoids of the natural numbers and the integers respectively.
+  The map $i \from \mathbb{N} \to \mathbb{Z}; \ i(n) = n$ is called inclusion map.
+  Obviously this map is a monoid homomorphisms that is not surjective,
+  because there are no negative integers in the image of $i$.
+  But we show that $i$ is epic.\\
+  Let $(\mathcal{M}, *, e)$ be any other monoid and $f, g \from \mathbb{Z} \to \mathcal{M}$ two
+  monoid homomorphisms.\\
+  We need to show the implication $f \circ i = g \circ i \Rightarrow f = g$, that is,
+  if $f$ and $g$ agree on $\mathbb{N}$, then they agree on the entire domain $\mathbb{Z}$.\\
+  Note that:
+  \begin{align*}
+    f(-n) &= f ((-1)_1 + (-1)_2 + \dots + (-1)_n)\\
+          &= f(-1)_1 * f(-1)_2 * \dots * f(-1)_n
+  \end{align*}
+  Therefore it suffices to show that $f(-1) = g(-1)$.
+  \begin{align*}
+    f(-1) &= f(-1) * e \\
+          &= f(-1) * g(0) \\
+          &= f(-1) * g(1 - 1) \\
+          &= f(-1) * g(1) * g(-1) \\
+          &\overset{(*)}{=} f(-1) * f(1) * g(-1) \\
+          &= f(-1 + 1) * g(-1) \\
+          &= f(0) * g(-1) \\
+          &= e * g(-1) \\
+          &= g(-1) \\ 
+  \end{align*}
+  In $(*)$ we use our assumption that $f=g$ if restricted to $\mathbb{N}$.\\
+  Therefore $i$ is an epic map, even though it is not surjective.
+\end{proof}
+
+Now we study how monomorphisms and epimorphisms are related to isomorphisms.
+Recall that in the category \textbf{Set} isomorphisms are exactly the invertible functions.
+It can be shown that invertible functions between two sets are
+exactly the bijective functions, i.e. functions that are both injective and surjective.
+Therefore, isomorphisms in the category \textbf{Set} are exactly those maps that are both monic and epic.\\
+In the category \textbf{Grp} isomorphisms are exactly the bijective group homomorphisms.
+since those are the group homomorphisms that have an inverse homomorphism.\\
+Similarly, in the category \textbf{Ring} isomorphisms are exactly the bijective ring homomorphisms.\\
+We now show for a general category $\mathscr{C}$ that every isomorphism is both monic and epic.
+\begin{proof}
+  Consider the commuting diagram:
+  \[
+    \begin{tikzcd}
+      A \arrow[r,shift left, "y"] \arrow[r,shift right,swap,"x"] &
+      B \arrow[dr, shift left, "1"]  \arrow{r}{m}  &
+      C \arrow{d}{e} \arrow[r,shift left, "i"] \arrow[r,shift right,swap,"j"] & D\\
+      &  & B \arrow[ul, shift left, "1"]&
+    \end{tikzcd}
+  \]
+  $m \from B \to C$ is an isomorphism with inverse $e \from C \to B$.
+  Then:\\
+  \begin{minipage}{.5\linewidth}
+    \vspace{4mm}
+    \centering $m$ is monic:
+    \[
+      \begin{aligned}
+        m \of x &= m \of y\\
+        e \of (m \of x) &= e \of (m \of y)\\
+        (e \of m) \of x &= (e \of m) \of y\\
+        1_B \of x &= 1_B \of y\\
+        x &= y
+      \end{aligned}
+    \]
+  \end{minipage}%
+  \begin{minipage}{.5\linewidth}
+    \vspace{4mm}
+    \centering $m$ is epic:
+    \[
+      \begin{aligned}
+        i \of m &= j \of m \\
+        (i \of m) \of e &= (j \of m) \of e\\
+        i \of (m \of e) &= j \of (m \of e)\\
+        i \of 1_C &= j \of 1_C\\
+        i &= j
+      \end{aligned}
+    \]
+  \end{minipage}%
+\end{proof}
+Note that the converse of the statement holds for the category \textbf{Set}, but not in general.
+If a map is both monic and epic it is not necessarily an isomorphism.
+For a map $f$ to be an isomorphism there needs to exist an inverse map $f^{-1}$.
+However monic and epic maps do not necessarily have an inverse.\\
+
+\section {Dual categories}
+
+$\mathscr{C}^{op}$ denotes the dual category for any category $\mathscr{C}$.
+which is obtained by reversing the arrows in $\mathscr{C}$.
+For every theorem $\Sigma$ in the language of category theory,
+the dualized theorem $\Sigma^*$ exists,
+and a proof for any theorem yields a rather simple proof for the dual theorem by the duality principle.\\
+Dual categories are especially useful for structures that are inherently dual.
+As an example, epic and monic maps are dual to each other, since any monic map in $\mathscr{C}$
+is an epic map in $\mathscr{C}^{op}$ and vice versa.
+The following theorem is an example where duality can be used.
+We first show that the composition of two monic maps is monic.
+\begin{proof}
+  Consider the commuting diagram:
+  \[
+    \begin{tikzcd}
+      A \arrow[dr, swap, "h"] \arrow{r}{g} & B \arrow{d}{f} \\
+      & C
+    \end{tikzcd}
+  \]
+  We assume $f$ and $g$ to be monic and show that $h = f \circ g $ is monic.
+  Let $X$ be any object and $x, x' \from X \to A$ two maps in the category.
+  \begin{align*}
+    h \circ x &= h \circ x' \\
+    (f \circ g) \circ x &= (f \circ g) \circ x' \\
+    f \circ (g \circ x) &= f \circ (g \circ x') \\
+    g \circ x &= g \circ x' \\
+    x &= x' \\
+  \end{align*}
+  Therefore $h$ is monic.
+\end{proof}
+The dual of the statement above states that the composition of epic maps is also epic.
+We get this fact immediately using the duality principle, since epic maps in $\mathscr{C}$
+are monic maps in $\mathscr{C}^{op}$ whose composition is monic in $\mathscr{C}^{op}$, as we
+have just shown, and therefore epic in $\mathscr{C}$.
 
 \section {Terminal and Initial Objects}
 \begin {definition}{Initial and terminal Objects}
-  In any category C,
-  \ an object 0 is called initial iff for any object $A \in C$, there is an unique morphism $0 \to A$.
-  \ an object 1 is called terminal iff for any object $A \in C$, there is an unique morphism $A \to 1$. A terminal object in C is initial in $C^{op}$.
-
+  Let $\mathscr{C}$ be a category.\\
+  An object $0$ is called initial  iff for any object $A \in \mathscr{C}$,
+  there is a unique morphism $0 \to A$.\\
+  An object $1$ is called terminal iff for any object $A \in \mathscr{C}$,
+  there is a unique morphism $A \to 1$.
 \end {definition}
 
+Note that inital and terminal objects are dual to each other.
+An initial object in $\mathscr{C}$ is terminal in $\mathscr{C}^{op}$.
 \subsection {Proposition:}
-   Initial and terminal objects are unique up to isomorphism.
+Initial and terminal objects are unique up to isomorphism.
 
 \subsubsection {Proof:}
-   Assume 0,0' are both inital objects in some category C and show that $f: 0 \to 0', g: 0' \to 0$ form an unique isomorphism $f \circ g$ between 0,0'. One can draw the following diagram:
-  
+Assume $0$ and $0'$ are both inital objects in some category $\mathscr{C}$ and show that
+$f \from 0 \to 0', g \from 0' \to 0$ form an isomorphism
+$f \circ g$ between $0$ and $0'$. Consider the following diagram:
+
+\[
 \begin{tikzcd}
-      & 0' \arrow{dr}{g} \arrow{rr}{id_{0'}}    &&  0'\\
-      0 \arrow{ur}{f} \arrow{rr}{id_0} && 0 \arrow{ur}{f}
-    \end{tikzcd}
- 
+  & 0' \arrow{dr}{g} \arrow{rr}{id_{0'}}    &&  0'\\
+  0 \arrow{ur}{f} \arrow{rr}{id_0} && 0 \arrow{ur}{f}
+\end{tikzcd}
+\]
 
-  Since 0 is initial, we know that f is unique, from the same argument follows uniqueness of $g = f^{-1}$. Therefore $f \circ g$ and $g \circ f$ is unique.    
-    \\ The same holds for terminal objects by duality. $\Box$
+Since $0$ is initial, we know that $f$ is unique, from the same argument follows uniqueness of $g = f^{-1}$.
+Therefore $f \circ g$ and $g \circ f$ is unique.\\
+The same holds for terminal objects by duality. $\Box$
 
-        Categories in which the terminal is identical to the initial object are called pointed category. Such objects zero objects.
+A category in which the terminal is identical to the initial object are called pointed category.
+Such an object is called zero object.
 
-    \subsubsection {Example:}
-    How to show that $\emptyset$ is initial in Set and the one- element set $\{x\}$ terminal?
-
-    \begin {itemize}
-    \item There is only the binary union function from $\emptyset$ to any other set, since there are no arguments in the domain to use.
-    \item Assume some f with
-      \\ $\forall A:$ set with $A \neq \emptyset$, $ f: A \to \{x\}$
-      f is obviously a constant function, since $\forall y \in A,\ f \ y = x$ holds, and therefore unique.
-		\end{itemize}
+\subsubsection {Examples:}
+In \textbf{Set} $\emptyset$ is initial and the one- element set $\{x\}$ terminal.
+\begin{proof}
+  \ \\
+\begin {itemize}
+\item There is only the empty function from $\emptyset$ to any other set, since there are no arguments in the domain.
+\item For all sets $A$ there is only one possible function $f \from A \to \{x\}$, since all elements of $A$ can only be mapped
+  to $x$, that is $\forall y \in A,\ f \ y = x$.
+\end{itemize}
+\end{proof}
+In \textbf{Grp} the trivial group is both initial and terminal.
+Let $1=\{e\}$ the trivial group with operation $*: e*e := e$.
+\begin {itemize}
+\item Let $\left({G, \circ}\right)$ be any group with identity element $e_G$,
+  and let $\phi: 1 \to G$ be a function.
+  Since group homomorphisms have to preserve the identity,
+  there is only one possible mapping for $\phi$ to be a group homomorphism:
+  $\phi (e) = e_G$.\\
+  Now we only need show that $\phi$ is a group homomorphism.
+  \begin{align*}
+    \phi (e) \circ \phi (e) &= e_G \circ e_G \\
+                            &= e_G \\
+                            &= \phi (e) \\
+                            &= \phi (e * e)
+  \end{align*}
+  Therefore $\phi$ is the unique group homomorphism from the trivial group.
+\item Recall that the singleton set is terminal in \textbf{Set}.
+  Therefore there is exactly one mapping
+  $\phi: G \to \{e\}$ defined by:
+  $\forall g \in G: \phi(g) = e$.
+  Again we need show that $\phi$ is a group homomorphism.
+  For any $g, g' \in G$, we have:
+  \begin{align*}
+    \phi(g)*\phi(g') &= e * e \\
+    &= e \\
+    &= \phi (g \circ g')
+  \end{align*}
+  Therefore $\phi$ is the unique group homomorphism into the trivial group.
+\end{itemize}
+The trivial group is both initial and terminal. It is therefore an example for a
+zero object, and \textbf{Grp} is an example for a pointed category.
+The idea behind the name is that the shape of \textbf{Grp}, if you were to draw it,
+looks like all other objects are pointed at the trivial group.
+\[
+  \begin{tikzcd}[column sep=large]
+    \dots
+    & \bigcirc \arrow [drrr, ""]
+    & \bigcirc \arrow[drr, ""]
+    & \bigcirc \arrow[dr, ""]
+    & \dots
+    & \bigcirc \arrow[dl, ""]
+    & \bigcirc \arrow[dll,""]
+    & \bigcirc \arrow[dlll,""]
+    & \dots \\[5mm]
+    \dots
+    & \bigcirc \arrow[rrr, ""]
+    & & &
+    Triv
+    \arrow[dlll, ""]
+    \arrow[dll, ""]
+    \arrow[dl, ""]
+    \arrow[dr, ""]
+    \arrow[drr, ""]
+    \arrow[drrr, ""]
+    \arrow[ulll, ""]
+    \arrow[ull, ""]
+    \arrow[ul, ""]
+    \arrow[ur, ""]
+    \arrow[urr, ""]
+    \arrow[urrr, ""]
+    \arrow[rrr, ""]
+    \arrow[lll, ""]
+    & &
+    &  \bigcirc \arrow[lll, ""]
+    & \dots   \\[5mm]
+    \dots
+    & \bigcirc \arrow [urrr, ""]
+    & \bigcirc \arrow[urr, ""]
+    & \bigcirc \arrow[ur, ""]
+    & \dots
+    & \bigcirc \arrow[ul, ""]
+    & \bigcirc \arrow[ull,""]
+    & \bigcirc \arrow[ulll,""]
+    & \dots
+  \end{tikzcd}
+\]
 \end{document}
 
 %%% Local Variables:
