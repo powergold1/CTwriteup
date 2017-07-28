@@ -11,15 +11,15 @@
 
 \section {Definition of Categories}
 \begin{definition}{Category}
-	A category $\mathscr{C}$ has the following components:
+	A \emph{category} $\mathscr{C}$ has the following components:
 	\begin{itemize}
-		\item a collection of objects $ob(\mathscr{C})$
-		\item $\forall \; A, B \in ob(\mathscr{C})$, a collection of maps (arrows, morphisms), denoted by‚ $\mathscr{C}(A, B)$
-		\item $\forall \; A, B, C \in ob(\mathscr{C})$, a composition function
+		\item a collection of \emph{objects}, denoted by $ob(\mathscr{C})$
+		\item $\forall \; A, B \in ob(\mathscr{C})$, a collection of \emph{maps} (\emph{arrows}, \emph{morphisms}), denoted by $\mathscr{C}(A, B)$
+		\item $\forall \; A, B, C \in ob(\mathscr{C})$, a \emph{composition}
 		\[\mathscr{C}(B, C) \times \mathscr{C}(A, B) \rightarrow  \mathscr{C}(A, C)
 		\]		\[ (g,f) \mapsto (g \of f)
 		\]
-		\item $\forall A \in ob(\mathscr{C})$, an element $1_A \in \mathscr{C}(A, A)$, called the identity on $A$ 
+		\item $\forall A \in ob(\mathscr{C})$, an element $1_A \in \mathscr{C}(A, A)$, called the \emph{identity} on $A$ 
  	\end{itemize}
  The following axioms have to be satisfied:
  \begin{itemize}
@@ -28,6 +28,8 @@
  \end{itemize}
 \end{definition}
 
+%%We also write $A \in \mathscr C$ instead of $A \in ob(\mathscr{C})$, and we write
+%%$A \overset{f}{\rightarrow} B$ for $f \in \mathscr{C}(A,B)$
 
 \section {Diagrams}
 It is often possible and useful to draw diagrams for a category or parts thereof.
@@ -43,21 +45,19 @@ morphisms $\{f, g, h, i, 1_A, 1_B, 1_C, 1_D \}$.
 Since every object is required to have an identity arrow by definition,
 we usually leave them implicit and do not include them in diagrams.\\
 We say a diagram \emph{commutes} if any two paths between two objects
-obtained by composing arrows are the same.
+obtained by composing arrows are identical.
 The example diagram above commutes if $ h \circ f = i \circ g $, meaning there is
 exactly one way to reach $D$ from $A$.
 
-
 \section {Isomorphisms}
 \begin{definition}{Isomorphism}
-  Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$. \\
-  A map $f \from A \to B$ in $\mathscr{C}$ is an isomorphism if there is a $g \from B \to A$ s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$. \\
-  $A$ and $B$ are isomorphic in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
+  Let $\mathscr{C}$ be a category and $A, B \in ob(\mathscr{C})$ objects. \\
+  A map $f \from A \to B \in \mathscr{C}$ is called an \emph{isomorphism} if there is a $g \from B \to A \in \mathscr{C}$,
+  s.t. $g \circ f = 1_A$ and $f \circ g = 1_B$. \\
+  $A$ and $B$ are \emph{isomorphic} in $\mathscr{C}$ ($A \cong B$) if there is an isomorphism between them.
 \end{definition}
 
 In short, a morphism is an isomorphism if it has an inverse.
-In the category \textbf{Set} for example,
-isomorphisms are exactly the invertible functions.\\
 If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
 \emph{the} inverse of $f$.
 
@@ -70,8 +70,9 @@ If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
 
 
 \section {Examples of Categories}
+We now introduce some constructions of categories as an example to show
+how categories are used to describe basic mathematical structures.
 \begin {enumerate}
-
  \item The category of sets, denoted as \textbf{Set}, is the category whose objects $ob$(\textbf{Set}) are sets.
    \\ The arrows in \textbf{Set} are the functions between two $A,B\ \in ob(\textbf{Set}).$
    \\ The identity- function is defined as $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
@@ -83,11 +84,15 @@ If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
  \item The category of relations, denoted as \textbf{Rel}, is the category whose objects are the sets
    \\The arrows are all binary relations between two $A,B \ \in ob(\textbf{Rel})$
    \\The identity arrow  is the identity function $\forall A: set, \ id_A:\ A \to A,\ \forall x \in A \ f \ x = x$
-   \\ The composition $R \circ S$, $R  \in \textbf{Rel}(A,B), S \in \textbf{Rel}(B,C), A,B,C \in ob(\textbf{Rel})$ is defined as $ (x,y) \in  R \circ S \leftrightarrow \exists  z.(x,z) \in S \land (z,y) \in R$
+   \\ The composition $R \circ S$, $R  \in \textbf{Rel}(A,B), S \in \textbf{Rel}(B,C), A,B,C \in ob(\textbf{Rel})$
+   is defined as $ (x,y) \in  R \circ S \leftrightarrow \exists  z.(x,z) \in S \land (z,y) \in R$
    
-  \item Categories similar to \textbf{Set} can be constructed for sets which have some additional structure and structure-preserving mappings between them. For example, there is a category \textbf{Poset} with partially ordered sets as objects. It is defined similarly to \textbf{Set}, with the difference that the functions are monotone. 
+ \item Categories similar to \textbf{Set} can be constructed for sets which have some additional structure and structure-preserving mappings between them.
+   For example, there is a category \textbf{Poset} with partially ordered sets as objects. It is defined similarly to \textbf{Set}, with the difference that the functions are monotone. 
   
-  \item A single poset $(P, \leq)$ also gives rise to a category $\mathscr{P}$ if we take elements of $P$ to be the objects. There is a unique arrow in $\mathscr{P}(A, B)$ iff $A \leq B$. The reflexivity requirement of $\leq$ ensures that identity arrows exist for all objects. Also, the category has composition because the order is transitive.
+ \item A single poset $(P, \leq)$ also gives rise to a category $\mathscr{P}$ if we take elements of $P$ to be the objects.
+   There is a unique arrow in $\mathscr{P}(A, B)$ iff $A \leq B$.
+   The reflexivity requirement of $\leq$ ensures that identity arrows exist for all objects. Also, the category has composition because the order is transitive.
   
   \item \textbf{Vect$_k$} is the category of vector spaces over a field $k$, with linear transformations as arrows.
   
@@ -102,20 +107,47 @@ If a map $f$ is an isomorphism, then its inverse is unique. Thus we speak of
     The identity arrow is the unit element $1$ of the group.\\
     Composition of maps in the category $\circ$ corresponds to applying the group action $\cdot$.\\
     A group requires all elements to have an inverse, thus we need each arrow $\mathcal{G}(G, G)$ to be an isomorphism.\\
-    Dropping the last requirement, the category would represent a single monoid.
-
+    If we dropped the last requirement, the category would represent a single monoid.
   
-  \item Categories need not represent mathematical structures. They can be arbitrarily constructed by giving objects, arrows and arrow composition in a way that satisfies the axioms in the definition. For instance, the category \textbf{1} includes a single object and its identity map, without further specification what the object is. \\
-    A category without non-trivial arrows is called discrete; removing all arrows except identities makes an arbitrary category discrete.
- \end {enumerate}
+  \item We often use categories to represent mathematical objects and connections between them.
+    However, categories do not need to represent mathematical structures at all.
+    They can be arbitrarily constructed by giving objects,
+    arrows, and composition in a way that satisfies the axioms in the definition.
+    It is not necessary to give those objects, arrows, or composition any meaning.
+    For instance, the category \textbf{1} contains a single object and its identity map,
+    without further specification what the object is.\\
+    A category that has no arrows besides identities is called \emph{discrete}.\\
+      \[
+        \begin{tikzcd}
+          \bullet \arrow[loop right, "1"]\\
+        \end{tikzcd}
+      \]
+      It is easy coming up with more examples of categories which do not have any mathematical content:\\[3mm]
+      \begin{minipage}{.5\linewidth}
+        \[
+          \begin{tikzcd}
+            \bullet \arrow[loop left, "1"] \qquad \bullet \arrow[loop right, "1"]\\
+          \end{tikzcd}
+        \]
+      \end{minipage}%
+      \begin{minipage}{.5\linewidth}
+        \[
+          \begin{tikzcd}
+            A \arrow{r}{g} \arrow[swap, dr, "f \circ g"] & B \arrow{d}{f} \\
+            & C
+          \end{tikzcd}
+        \]
+      \end{minipage}
+    \end {enumerate}
 
+    \newpage
 
-\section {Epics and Monics}
+\section {Monics and epics}
 
 Monomorphisms and epimorphisms are two special kinds of morphisms.
 
 \begin{definition}{Monomorphism}
-  Let $\mathscr{C}$ be a category. A map $X \overset{f}{\to} Y$ is called a monomorphism if for all objects $Z$ and maps
+  Let $\mathscr{C}$ be a category. A map $X \overset{f}{\to} Y$ is called a \emph{monomorphism} if for all objects $Z$ and maps
   $
   \begin{tikzcd}
     Z \arrow[r,shift left, "g"] \arrow[r,shift right,swap,"g'"] & X
@@ -124,11 +156,11 @@ Monomorphisms and epimorphisms are two special kinds of morphisms.
   \[
     f \circ g = f \circ g' \Rightarrow g = g'
   \]
-  If $f$ is a monomorphism, we say $f$ is monic.
+  If $f$ is a monomorphism, we say $f$ is \emph{monic}.
 \end{definition}
 
 \begin{definition}{Epimorphism}
-  Let $\mathscr{C}$ be a category. A map $X \overset{f}{\to} Y$ is called an epimorphism if for all objects $Z$ and maps
+  Let $\mathscr{C}$ be a category. A map $X \overset{f}{\to} Y$ is called an \emph{epimorphism} if for all objects $Z$ and maps
   $
   \begin{tikzcd}
     Y \arrow[r,shift left, "g"] \arrow[r,shift right,swap,"g'"] & Z
@@ -137,13 +169,13 @@ Monomorphisms and epimorphisms are two special kinds of morphisms.
   \[
     g' \circ f = g' \circ f \Rightarrow g = g'
   \]
-  If $f$ is an epimorphism, we say $f$ is epic.
+  If $f$ is an epimorphism, we say $f$ is \emph{epic}.
 \end{definition}
 
 %% TODO: We could add a reference to the definition of categories, so that we can link it in the text below
 
 In other words, a monomorphism is cancellable on the left, and an epimorphism is cancellable on the right of compositions.
-By the identity laws of categories, for any object $A$ the identity map $1_A$ is always both monic and epic.\\
+By the identity laws, for any object $A$ the identity map $1_A$ is always both monic and epic.\\
 In the category \textbf{Set}, monic maps are exactly the injective functions, and epic maps are exactly the surjective functions.
 \begin{proof}
   First we show $f$ monic $\Leftrightarrow$ $f$ injective.
@@ -189,12 +221,13 @@ However, we show that there are already maps in \textbf{Mon} that are epic, but 
 \begin{proof}
   Consider the two monoids $(\mathbb{N}, +, 0)$ and $(\mathbb{Z}, +, 0)$, i.e. the
   additive monoids of the natural numbers and the integers respectively.
-  The map $i \from \mathbb{N} \to \mathbb{Z}; \ i(n) = n$ is called inclusion map.
+  The map $i \from \mathbb{N} \to \mathbb{Z}; \ i(n) = n$ is called \emph{inclusion map},
+  since the monoid $(\mathbb{N}, +, 0)$ is simply embedded in $(\mathbb{Z}, +, 0)$.
   Obviously this map is a monoid homomorphisms that is not surjective,
   because there are no negative integers in the image of $i$.
-  But we show that $i$ is epic.\\
+  But we show that $i$ is epic.
   Let $(\mathcal{M}, *, e)$ be any other monoid and $f, g \from \mathbb{Z} \to \mathcal{M}$ two
-  monoid homomorphisms.\\
+  monoid homomorphisms.
   We need to show the implication $f \circ i = g \circ i \Rightarrow f = g$, that is,
   if $f$ and $g$ agree on $\mathbb{N}$, then they agree on the entire domain $\mathbb{Z}$.\\
   Note that:
@@ -219,7 +252,7 @@ However, we show that there are already maps in \textbf{Mon} that are epic, but 
 \end{proof}
 
 Now we study how monomorphisms and epimorphisms are related to isomorphisms.
-Recall that in the category \textbf{Set} isomorphisms are exactly the invertible functions.
+In the category \textbf{Set} isomorphisms are exactly the invertible functions.
 It can be shown that invertible functions between two sets are
 exactly the bijective functions, i.e. functions that are both injective and surjective.
 Therefore, isomorphisms in the category \textbf{Set} are exactly those maps that are both monic and epic.\\
@@ -269,7 +302,7 @@ We now show for a general category $\mathscr{C}$ that every isomorphism is both 
 Note that the converse of the statement holds for the category \textbf{Set}, but not in general.
 If a map is both monic and epic it is not necessarily an isomorphism.
 For a map $f$ to be an isomorphism there needs to exist an inverse map $f^{-1}$.
-However monic and epic maps do not necessarily have an inverse.\\
+However, monic and epic maps do not necessarily have an inverse.\\
 
 \section {Dual categories}
 
@@ -281,7 +314,7 @@ and a proof for any theorem yields a rather simple proof for the dual theorem by
 Dual categories are especially useful for structures that are inherently dual.
 As an example, epic and monic maps are dual to each other, since any monic map in $\mathscr{C}$
 is an epic map in $\mathscr{C}^{op}$ and vice versa.
-The following theorem is an example where duality can be used.
+The next theorem is an example where duality can be used.
 We first show that the composition of two monic maps is monic.
 \begin{proof}
   Consider the commuting diagram:
@@ -302,7 +335,7 @@ We first show that the composition of two monic maps is monic.
   \end{align*}
   Therefore $h$ is monic.
 \end{proof}
-The dual of the statement above states that the composition of epic maps is also epic.
+The dual of the statement above is that the composition of epic maps is also epic.
 We get this fact immediately using the duality principle, since epic maps in $\mathscr{C}$
 are monic maps in $\mathscr{C}^{op}$ whose composition is monic in $\mathscr{C}^{op}$, as we
 have just shown, and therefore epic in $\mathscr{C}$.
@@ -310,18 +343,20 @@ have just shown, and therefore epic in $\mathscr{C}$.
 \section {Terminal and Initial Objects}
 \begin {definition}{Initial and terminal Objects}
   Let $\mathscr{C}$ be a category.\\
-  An object $0$ is called initial  iff for any object $A \in \mathscr{C}$,
+  An object $0$ is called \emph{initial}  iff for any object $A \in \mathscr{C}$,
   there is a unique morphism $0 \to A$.\\
-  An object $1$ is called terminal iff for any object $A \in \mathscr{C}$,
+  An object $1$ is called \emph{terminal} iff for any object $A \in \mathscr{C}$,
   there is a unique morphism $A \to 1$.
 \end {definition}
 
 Note that inital and terminal objects are dual to each other.
 An initial object in $\mathscr{C}$ is terminal in $\mathscr{C}^{op}$.
-\subsection {Proposition:}
-Initial and terminal objects are unique up to isomorphism.
+A category in which the terminal is identical to the initial object are called a \emph{pointed category}.
+Such an object is called \emph{zero object}.\\
+In a general category, initial and terminal objects do not need to exist at all,
+but if they do, then they are unique up to isomorphism.
 
-\subsubsection {Proof:}
+\begin{proof}
 Assume $0$ and $0'$ are both inital objects in some category $\mathscr{C}$ and show that
 $f \from 0 \to 0', g \from 0' \to 0$ form an isomorphism
 $f \circ g$ between $0$ and $0'$. Consider the following diagram:
@@ -335,22 +370,22 @@ $f \circ g$ between $0$ and $0'$. Consider the following diagram:
 
 Since $0$ is initial, we know that $f$ is unique, from the same argument follows uniqueness of $g = f^{-1}$.
 Therefore $f \circ g$ and $g \circ f$ is unique.\\
-The same holds for terminal objects by duality. $\Box$
+The same holds for terminal objects by duality.
+\end{proof}
 
-A category in which the terminal is identical to the initial object are called pointed category.
-Such an object is called zero object.
 
-\subsubsection {Examples:}
+\subsection {Examples:}
 In \textbf{Set} $\emptyset$ is initial and the one- element set $\{x\}$ terminal.
 \begin{proof}
-  \ \\
+  \
 \begin {itemize}
 \item There is only the empty function from $\emptyset$ to any other set, since there are no arguments in the domain.
 \item For all sets $A$ there is only one possible function $f \from A \to \{x\}$, since all elements of $A$ can only be mapped
-  to $x$, that is $\forall y \in A,\ f \ y = x$.
+  to $x$, that is, $\forall y \in A,\ f \ y = x$.
 \end{itemize}
 \end{proof}
 In \textbf{Grp} the trivial group is both initial and terminal.
+\begin{proof}
 Let $1=\{e\}$ the trivial group with operation $*: e*e := e$.
 \begin {itemize}
 \item Let $\left({G, \circ}\right)$ be any group with identity element $e_G$,
@@ -381,7 +416,8 @@ Let $1=\{e\}$ the trivial group with operation $*: e*e := e$.
 \end{itemize}
 The trivial group is both initial and terminal. It is therefore an example for a
 zero object, and \textbf{Grp} is an example for a pointed category.
-The idea behind the name is that the shape of \textbf{Grp}, if you were to draw it,
+\end{proof}
+The idea behind the name pointed category is that the shape of \textbf{Grp}, if you were to draw it,
 looks like all other objects are pointed at the trivial group.
 \[
   \begin{tikzcd}[column sep=large]
